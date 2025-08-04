@@ -1,13 +1,19 @@
-def copy_file(command: str) -> None:
-    parts = command.strip().split()
+def main() -> None:
+    file_name = input("Enter name of the file: ").strip()
+    full_name = f"{file_name}.txt"
 
-    if len(parts) != 3 or parts[0] != "cp":
-        return  
+    lines = []
+    while True:
+        line = input("Enter new line of content: ")
+        if line.lower() == "stop":
+            break
+        lines.append(line)
 
-    src, dst = parts[1], parts[2]
+    with open(full_name, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
 
-    if src == dst:
-        return  
-        
-    with open(src, "r", encoding="utf-8") as file_in, open(dst, "w", encoding="utf-8") as file_out:
-        file_out.write(file_in.read())
+    print(f"File '{full_name}' created successfully.")
+
+
+if __name__ == "__main__":
+    main()
